@@ -1,0 +1,8 @@
+/**: # This will put all the parameters in every node
+  ros__parameters:
+    names:
+      - bob
+      - jon
+    colors:
+      bob: [0.1, 0.2, 0.3]
+      jon: [0.1, 1.2, 1.3]
