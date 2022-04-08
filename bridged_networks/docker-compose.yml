@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  ros_talker_1:
+    image: osrf/ros:galactic-desktop
+    command: 'ros2 topic pub /hello std_msgs/msg/String "data: hello1"'
+    networks:
+      - bridge1
+  ros_talker_2:
+    image: osrf/ros:galactic-desktop
+    command: 'ros2 topic pub /hello std_msgs/msg/String "data: hello2"'
+    networks:
+      - bridge2
+  ros_listener_1:
+    image: osrf/ros:galactic-desktop
+    command: 'ros2 topic echo /hello'
+    tty: true
+    depends_on:
+      - ros_talker_1
+      - ros_talker_2
+    networks:
+      - bridge1
+      - bridge2
+
+networks:
+  bridge1:
+    driver: bridge
+  bridge2:
+    driver: bridge
